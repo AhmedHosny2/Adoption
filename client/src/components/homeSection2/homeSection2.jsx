@@ -1,4 +1,63 @@
+import { useEffect, useRef } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
+
+const svgVariants = {
+	hidden: {
+		opacity: 0,
+		y: '-7vw',
+	},
+	visible: {
+		opacity: 1,
+		y: '0vw',
+		transition: {
+			duration: 2,
+			ease: 'easeOut',
+		},
+	},
+};
+
+const pathVariants = {
+	hidden: {
+		opacity: 0,
+		pathLength: 0,
+	},
+	visible: {
+		opacity: 1,
+		pathLength: 1,
+		transition: {
+			delay: 1,
+			duration: 1.5,
+			ease: 'easeInOut',
+		},
+	},
+};
+
+const textVariants = {
+	hidden: {
+		opacity: 0,
+		y: 75,
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.5,
+			delay: 0.25,
+		},
+	},
+};
+
 function HomeSection2() {
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: true });
+	const inViewControls = useAnimation();
+
+	useEffect(() => {
+		if (isInView) {
+			inViewControls.start('visible');
+		}
+	});
+
 	return (
 		<>
 			<div className="container my-24 mx-auto md:px-6">
@@ -6,82 +65,201 @@ function HomeSection2() {
 					<h2 className="mb-16 text-3xl font-bold text-neutral">
 						Planning to <u className="text-primary dark:text-accent-focus">adopt</u> a pet
 					</h2>
-					<div className="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
+					<div ref={ref} className="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
 						<div className="mb-12 md:mb-0">
 							<div className="mb-6 inline-block rounded-md bg-primary-100 p-4 text-primary">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
+								<motion.svg
+									variants={svgVariants}
+									initial="hidden"
+									animate={inViewControls}
+									width="150px"
+									height="150px"
+									viewBox="0 0 24.00 24.00"
 									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="2"
-									stroke="currentColor"
-									className="h-6 w-6"
+									xmlns="http://www.w3.org/2000/svg"
+									stroke="#ffffff"
 								>
-									<path
+									<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+									<g
+										id="SVGRepo_tracerCarrier"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
-									/>
-								</svg>
+									></g>
+									<g id="SVGRepo_iconCarrier">
+										{' '}
+										<motion.path
+											variants={pathVariants}
+											d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+											stroke="#ffffff"
+											stroke-width="1.9200000000000004"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										></motion.path>{' '}
+										<motion.path
+											variants={pathVariants}
+											d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+											stroke="#ffffff"
+											stroke-width="1.9200000000000004"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										></motion.path>{' '}
+									</g>
+								</motion.svg>
 							</div>
-							<h5 className="mb-4 text-lg font-bold text-accent-focus">Adopt From a User</h5>
-							<p className="text-neutral-500 dark:text-accent-content">
+							<motion.h5
+								variants={textVariants}
+								initial="hidden"
+								animate={inViewControls}
+								className="mb-4 text-lg font-bold text-accent-focus"
+							>
+								Adopt From a Another User
+							</motion.h5>
+							<motion.p
+								variants={textVariants}
+								initial="hidden"
+								animate={inViewControls}
+								className="text-neutral-500 dark:text-accent-content"
+							>
 								Laudantium totam quas cumque pariatur at doloremque hic quos quia eius.
 								Reiciendis optio minus mollitia rerum labore facilis inventore voluptatem
 								ad, quae quia sint. Ullam.
-							</p>
+							</motion.p>
 						</div>
 
 						<div className="mb-12 md:mb-0">
 							<div className="mb-6 inline-block rounded-md bg-primary-100 p-4 text-primary">
-								<svg
+								<motion.svg
+									variants={svgVariants}
+									initial="hidden"
+									animate={inViewControls}
+									fill="#ffffff"
+									height="150px"
+									width="150px"
+									version="1.1"
+									id="Capa_1"
 									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="2"
-									stroke="currentColor"
-									className="h-6 w-6"
+									viewBox="0 0 470 470"
+									stroke="#ffffff"
+									stroke-width="23.970000000000002"
 								>
-									<path
+									<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+									<g
+										id="SVGRepo_tracerCarrier"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
-									/>
-								</svg>
+									></g>
+									<g id="SVGRepo_iconCarrier">
+										{' '}
+										<g>
+											{' '}
+											<motion.path
+												variants={pathVariants}
+												d="M164.238,124.387c-16.28,16.576-25.246,38.681-25.246,62.244v103.06l-38.767,38.767c-2.929,2.929-2.929,7.678,0,10.606 c1.464,1.464,3.384,2.197,5.303,2.197s3.839-0.732,5.303-2.197l30.779-30.779c6.429,18.485,24.016,31.794,44.663,31.794 c26.071,0,47.282-21.21,47.282-47.282V185.394c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v107.403 c0,17.8-14.481,32.282-32.282,32.282c-17.799,0-32.28-14.48-32.281-32.28c0-0.001,0-0.003,0-0.004V186.631 c0-40.312,32.328-73.107,72.063-73.107s72.063,32.804,72.063,73.125c0,4.142,3.358,7.5,7.5,7.5h51.231 c0.054,7.006,0.122,18.299,0.122,30.93c0,17.076-13.867,30.967-30.911,30.967h-19.345c-4.142,0-7.5,3.358-7.5,7.5V432.5 c0,4.142,3.358,7.5,7.5,7.5s7.5-3.358,7.5-7.5V271.046h11.845c25.315,0,45.911-20.621,45.911-45.967 c0-21.002-0.186-38.339-0.188-38.511c-0.045-4.11-3.389-7.418-7.5-7.418h-51.47c-1.695-20.726-10.4-39.943-24.939-54.752 c-16.381-16.685-38.335-25.873-61.819-25.873C202.572,98.524,180.618,107.709,164.238,124.387z"
+											></motion.path>{' '}
+											<motion.path
+												variants={pathVariants}
+												d="M459.752,108.252L343.191,51.677V7.5c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v36.896L238.275,0.753 c-2.068-1.004-4.481-1.004-6.55,0l-221.478,107.5c-3.727,1.809-5.281,6.295-3.472,10.022c1.809,3.726,6.295,5.282,10.022,3.472 l9.32-4.524V462.5c0,4.142,3.358,7.5,7.5,7.5h402.766c4.142,0,7.5-3.358,7.5-7.5V117.223l9.32,4.524 c1.055,0.512,2.17,0.754,3.27,0.754c2.782,0,5.456-1.555,6.752-4.227C465.034,114.548,463.479,110.061,459.752,108.252z M428.883,455H41.117V109.942L235,15.837l193.883,94.105V455z"
+											></motion.path>{' '}
+										</g>{' '}
+									</g>
+								</motion.svg>
 							</div>
-							<h5 className="mb-4 text-lg font-bold text-accent-focus">
+							<motion.h5
+								variants={textVariants}
+								initial="hidden"
+								animate={inViewControls}
+								className="mb-4 text-lg font-bold text-accent-focus"
+							>
 								Adopt From a Shelter
-							</h5>
-							<p className="text-neutral-500 dark:text-accent-content">
+							</motion.h5>
+							<motion.p
+								variants={textVariants}
+								initial="hidden"
+								animate={inViewControls}
+								className="text-neutral-500 dark:text-accent-content"
+							>
 								Eum nostrum fugit numquam, voluptates veniam neque quibusdam ullam
 								aspernatur odio soluta, quisquam dolore animi mollitia a omnis praesentium,
 								expedita nobis!
-							</p>
+							</motion.p>
 						</div>
 
 						<div className="mb-12 md:mb-0">
 							<div className="mb-6 inline-block rounded-md bg-primary-100 p-4 text-primary">
-								<svg
+								<motion.svg
+									variants={svgVariants}
+									initial="hidden"
+									animate={inViewControls}
+									version="1.1"
+									id="Layer_1"
 									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="2"
-									stroke="currentColor"
-									className="h-6 w-6"
+									width="150px"
+									height="150px"
+									viewBox="0 0 64 64"
+									enable-background="new 0 0 64 64"
+									fill="#ffffff"
+									stroke="#ffffff"
 								>
-									<path
+									<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+									<g
+										id="SVGRepo_tracerCarrier"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-									/>
-								</svg>
+									></g>
+									<g id="SVGRepo_iconCarrier">
+										{' '}
+										<title>Dog</title> <desc>Created with Sketch.</desc>{' '}
+										<g id="Group" transform="translate(1.000000, 6.000000)">
+											{' '}
+											<motion.path
+												variants={pathVariants}
+												id="Shape_1_"
+												fill="none"
+												stroke="#ffffff"
+												stroke-width="3.904"
+												stroke-linejoin="round"
+												d="M34.7,42c-2.8,0-6.4,4.9-6.4,8h-5.2 c-1.7,0-3.2,1.6-3.2,3.5l0,0c0,2,1.4,3.4,3.2,3.4h22.5C58.6,57,62.1,45.3,61,37.1l0,0c0,0-11.1,11.8-14.1,11.8 c0.1-12.2-8.9-23.7-14.8-29C28.8,16.9,27.9,9,27.9,9V4.8c0-4.3-0.3-8.9-1.2-9.5c-1.6-1.1-4.4,4.6-6.7,4.6c-11.7,0-10,8-12.5,8H2.2 C0,7.9,0,9.7,0,10.9c0.2,3.3,1.9,6,10,6c2,0,5.1,2.8,5.1,7.9v26.1H15h-1c-1.1,0-2,0.9-2,2v2c0,1.1,0.9,2,2,2h15.75"
+											></motion.path>{' '}
+											<motion.path
+												variants={pathVariants}
+												id="Shape_2_"
+												fill="none"
+												stroke="#ffffff"
+												stroke-width="3.904"
+												stroke-linejoin="round"
+												d="M20.9,38v8.8"
+											></motion.path>{' '}
+											<motion.path
+												variants={pathVariants}
+												id="Shape_4_"
+												fill="none"
+												stroke="#ffffff"
+												stroke-width="3.904"
+												stroke-linejoin="round"
+												d="M1,14h6"
+											></motion.path>{' '}
+										</g>{' '}
+									</g>
+								</motion.svg>
 							</div>
-							<h5 className="mb-4 text-lg font-bold text-accent-focus">Put For Adoption</h5>
-							<p className="text-neutral-500 dark:text-accent-content">
+							<motion.h5
+								variants={textVariants}
+								initial="hidden"
+								animate={inViewControls}
+								className="mb-4 text-lg font-bold text-accent-focus"
+							>
+								Put For Adoption
+							</motion.h5>
+							<motion.p
+								variants={textVariants}
+								initial="hidden"
+								animate={inViewControls}
+								className="text-neutral-500 dark:text-accent-content"
+							>
 								Enim cupiditate, minus nulla dolor cumque iure eveniet facere ullam beatae
 								hic voluptatibus dolores exercitationem? Facilis debitis aspernatur amet
 								nisi?
-							</p>
+							</motion.p>
 						</div>
 					</div>
 				</section>

@@ -1,10 +1,10 @@
+import { motion } from 'framer-motion';
 import Button1 from '../button1/button1';
 import Card2 from '../card2/card2';
 import cat1 from '../../assets/cat1.webp';
 import dog1 from '../../assets/dog1.webp';
 import dog2 from '../../assets/dog2.jpg';
 import rabbit1 from '../../assets/rabbit1.jpg';
-import { motion } from 'framer-motion';
 
 const sectionVariant = {
 	hidden: {
@@ -18,7 +18,7 @@ const sectionVariant = {
 	},
 };
 
-function homeSection1() {
+function HomeSection1() {
 	return (
 		<>
 			<motion.div
@@ -50,4 +50,4 @@ function homeSection1() {
 	);
 }
 
-export default homeSection1;
+export default HomeSection1;
