@@ -1,0 +1,36 @@
+.fill-current {
+	text-align: center;
+	font-size: 18px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	color: #241406;
+	background: transparent;
+	cursor: pointer;
+	transition: ease-out 0.5s;
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 0 #e9a63b;
+}
+
+.socials-twitter:hover {
+	color: rgb(255, 255, 255);
+	box-shadow: inset 0 -100px 0 0 #e9a63b;
+}
+.socials-twitter:active {
+	transform: scale(0.9);
+}
+
+.socials-youtube:hover {
+	color: white;
+	box-shadow: inset 0 -100px 0 0 #e9a63b;
+}
+.socials-youtube:active {
+	transform: scale(0.9);
+}
+
+.socials-facebook:hover {
+	color: white;
+	box-shadow: inset 0 -100px 0 0 #e9a63b;
+}
+.socials-facebook:active {
+	transform: scale(0.9);
+}
