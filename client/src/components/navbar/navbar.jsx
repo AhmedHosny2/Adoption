@@ -100,8 +100,8 @@ export default function Navbar() {
 													to={item.href}
 													className={classNames(
 														item.current
-															? 'bg-accent text-white'
-															: 'text-secondary-content hover:bg-accent-focus hover:text-white',
+															? 'bg-accent text-white hover:bg-accent-focus hover:text-white transition-color duration-300'
+															: 'text-secondary-content hover:bg-accent-focus hover:text-white transition-color duration-300',
 														'rounded-md px-3 py-2 text-sm font-medium'
 													)}
 													aria-current={item.current ? 'page' : undefined}
@@ -199,8 +199,8 @@ export default function Navbar() {
 										to={item.href}
 										className={classNames(
 											item.current
-												? 'bg-accent text-white'
-												: 'text-secondary-content hover:bg-accent-focus hover:text-white',
+												? 'bg-accent text-white hover:bg-accent-focus hover:text-white transition-color duration-300'
+												: 'text-secondary-content hover:bg-accent-focus hover:text-white transition-color duration-300',
 											'block rounded-md px-3 py-2 text-base font-medium'
 										)}
 										aria-current={item.current ? 'page' : undefined}
