@@ -1,9 +1,15 @@
 import './footer.css';
+import { motion } from 'framer-motion';
 
 function Footer() {
 	return (
 		<>
-			<footer className="footer p-10 bg-base-300 text-base-content">
+			<motion.footer
+				className="footer p-10 bg-base-300 text-base-content"
+				initial={{ y: 250 }}
+				animate={{ y: 0 }}
+				transition={{ delay: 1.5, type: 'spring', stiffness: 120 }}
+			>
 				<nav>
 					<header className="footer-title">Services</header>
 					<a className="link link-hover">Branding</a>
@@ -56,7 +62,7 @@ function Footer() {
 						</a>
 					</div>
 				</nav>
-			</footer>
+			</motion.footer>
 		</>
 	);
 }

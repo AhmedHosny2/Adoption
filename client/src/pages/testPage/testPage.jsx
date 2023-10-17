@@ -1,6 +1,4 @@
 import '../../App.css';
-import HomeHero from '../../components/homeHero/homeHero';
-import HomeSection1 from '../../components/homeSection1/homeSection1';
 import HomeSection2 from '../../components/homeSection2/homeSection2';
 import Footer from '../../components/footer/footer';
 import { motion } from 'framer-motion';
@@ -8,10 +6,12 @@ import { motion } from 'framer-motion';
 const containerVariants = {
 	start: {
 		opacity: 0,
+		x: '100vw',
 	},
 	end: {
 		opacity: 1,
-		transition: { delay: 1.5, duration: 1.5, ease: 'easeInOut' },
+		x: '0vw',
+		transition: { delay: 1, duration: 0.6, ease: 'easeOut' },
 	},
 	exit: {
 		x: '-100vw',
@@ -19,12 +19,10 @@ const containerVariants = {
 	},
 };
 
-function Homepage() {
+function TestPage() {
 	return (
 		<>
 			<motion.div variants={containerVariants} initial="start" animate="end" exit="exit">
-				<HomeHero />
-				<HomeSection1 />
 				<HomeSection2 />
 			</motion.div>
 			<Footer />
@@ -32,4 +30,4 @@ function Homepage() {
 	);
 }
 
-export default Homepage;
+export default TestPage;

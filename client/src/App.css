@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide the vertical and horizontal scroll bars */
+::-webkit-scrollbar {
+	width: 0px; /* You can adjust the width as needed */
+	height: 0px; /* You can adjust the height as needed */
+}
+
