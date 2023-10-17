@@ -6,10 +6,10 @@ import Footer from '../../components/footer/footer';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
-	start: {
+	hidden: {
 		opacity: 0,
 	},
-	end: {
+	visible: {
 		opacity: 1,
 		transition: { delay: 1.5, duration: 1.5, ease: 'easeInOut' },
 	},
@@ -22,7 +22,7 @@ const containerVariants = {
 function Homepage() {
 	return (
 		<>
-			<motion.div variants={containerVariants} initial="start" animate="end" exit="exit">
+			<motion.div variants={containerVariants} initial="hidden" animate="visible" exit="exit">
 				<HomeHero />
 				<HomeSection1 />
 				<HomeSection2 />
