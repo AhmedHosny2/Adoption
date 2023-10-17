@@ -2,7 +2,6 @@ import '../../App.css';
 import HomeHero from '../../components/homeHero/homeHero';
 import HomeSection1 from '../../components/homeSection1/homeSection1';
 import HomeSection2 from '../../components/homeSection2/homeSection2';
-import Footer from '../../components/footer/footer';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -27,7 +26,6 @@ function Homepage() {
 				<HomeSection1 />
 				<HomeSection2 />
 			</motion.div>
-			<Footer />
 		</>
 	);
 }

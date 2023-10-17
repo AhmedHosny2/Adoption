@@ -37,7 +37,7 @@ const navigationVariants = {
 };
 
 const navigation = [
-	{ name: 'Adopt', href: '/test', current: true },
+	{ name: 'Adopt', href: '/search', current: true },
 	{ name: 'Put for Adoption', href: '#', current: false },
 	{ name: 'Donate', href: '#', current: false },
 	{ name: 'Other', href: '#', current: false },
