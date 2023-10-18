@@ -2,6 +2,7 @@ import '../../App.css';
 import HomeHero from '../../components/homeHero/homeHero';
 import HomeSection1 from '../../components/homeSection1/homeSection1';
 import HomeSection2 from '../../components/homeSection2/homeSection2';
+import HomeSection3 from '../../components/homeSection3/homeSection3';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -25,6 +26,7 @@ function Homepage() {
 				<HomeHero />
 				<HomeSection1 />
 				<HomeSection2 />
+				<HomeSection3 />
 			</motion.div>
 		</>
 	);

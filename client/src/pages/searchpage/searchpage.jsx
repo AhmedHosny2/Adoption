@@ -26,18 +26,6 @@ const containerVariants = {
 	},
 };
 
-const sidebarItemVariants = {
-	hidden: {
-		opacity: 0,
-		y: '100vw',
-	},
-	visibile: {
-		opacity: 1,
-		y: '0vw',
-		transition: { delay: 1, duration: 0.6, ease: 'easeOut' },
-	},
-};
-
 const cardData = [
 	{
 		name: 'Felix',
@@ -238,10 +226,7 @@ function SearchPage() {
 							aria-label="close sidebar"
 							className="drawer-overlay"
 						></label>
-						<motion.ul
-							variants={sidebarItemVariants}
-							className="menu p-4 w-80 min-h-full bg-base-200 text-base-content"
-						>
+						<ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
 							{/* Sidebar content here */}
 							<li>
 								<a>
@@ -279,7 +264,7 @@ function SearchPage() {
 									<Select title={'Color'} optionList={['Color1', 'Color2', 'Color3']} />
 								</a>
 							</li>
-						</motion.ul>
+						</ul>
 					</div>
 				</div>
 			</motion.div>
