@@ -4,10 +4,11 @@ function SearchPage() {
 			<div className="join flex flex-wrap justify-center items-center">
 				<div>
 					<div>
-						<input className="input input-bordered join-item w-80" placeholder="Search" />
+						<input className="input input-bordered join-item" placeholder="Search" />
 					</div>
 				</div>
-				<select className="select select-bordered join-item">
+
+				{/* <select className="select select-bordered join-item">
 					<option selected>--Pet--</option>
 					<option>Dog</option>
 					<option>Cat</option>
@@ -32,7 +33,7 @@ function SearchPage() {
 					<option>Orange</option>
 					<option>Brown</option>
 					<option>Black</option>
-				</select>
+				</select> */}
 				<div className="indicator">
 					<button className="btn btn-outline btn-accent join-item bg-base-300">Search</button>
 				</div>
