@@ -1,8 +1,10 @@
 import '../../App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SearchBar from '../../components/search/search';
 import Card4 from '../../components/card4/card4';
+import Card4Skeleton from '../../components/card4/card4Skeleton';
+import PaginationSkeleton from './paginationSkeleton';
 import Select from '../../components/select/select';
 
 import dog1 from '../../assets/dog1.webp';
@@ -31,106 +33,228 @@ const cardData = [
 		name: 'Felix',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 6,
+		gender: 'm',
+		size: 'big',
+		color: 'white',
 		image: dog1,
 	},
 	{
 		name: 'Joe',
 		animal: 'Dog',
-		breed: 'Golden',
+		breed: 'Hotdog',
+		age: 6,
+		gender: 'm',
+		size: 'big',
+		color: 'white',
 		image: dog2,
 	},
 	{
 		name: 'Joesey',
-		animal: 'Dog',
+		animal: 'Cat',
 		breed: 'Golden',
+		age: 6,
+		gender: 'm',
+		size: 'big',
+		color: 'white',
 		image: cat1,
 	},
 	{
 		name: 'Max',
-		animal: 'Dog',
-		breed: 'Golden',
+		animal: 'Rabbit',
+		breed: 'Snow Bunny',
+		age: 8,
+		gender: 'm',
+		size: 'big',
+		color: 'white',
 		image: rabbit1,
 	},
 	{
 		name: 'Stecki',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 8,
+		gender: 'm',
+		size: 'big',
+		color: 'white',
 		image: dog1,
 	},
 	{
 		name: 'Choco',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 8,
+		gender: 'm',
+		size: 'big',
+		color: 'white',
 		image: dog2,
 	},
 	{
 		name: 'Oreo',
-		animal: 'Dog',
+		animal: 'Cat',
 		breed: 'Golden',
+		age: 8,
+		gender: 'm',
+		size: 'big',
+		color: 'black',
 		image: cat1,
 	},
 	{
 		name: 'Funnel',
-		animal: 'Dog',
-		breed: 'Golden',
+		animal: 'Rabbit',
+		breed: 'Snow Bunny',
+		age: 8,
+		gender: 'm',
+		size: 'medium',
+		color: 'black',
 		image: rabbit1,
 	},
 	{
 		name: 'Pizza',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 8,
+		gender: 'm',
+		size: 'medium',
+		color: 'brown',
 		image: dog1,
 	},
 	{
 		name: 'Hotdog',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 8,
+		gender: 'm',
+		size: 'medium',
+		color: 'brown',
 		image: dog2,
 	},
 	{
 		name: 'Penny',
-		animal: 'Dog',
+		animal: 'Cat',
 		breed: 'Golden',
+		age: 8,
+		gender: 'f',
+		size: 'small',
+		color: 'brown',
 		image: cat1,
 	},
 	{
 		name: 'Sunny',
-		animal: 'Dog',
-		breed: 'Golden',
+		animal: 'Rabbit',
+		breed: 'Snow Bunny',
+		age: 8,
+		gender: 'f',
+		size: 'small',
+		color: 'brown',
 		image: rabbit1,
 	},
 	{
 		name: 'Hammer',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 12,
+		gender: 'f',
+		size: 'small',
+		color: 'brown',
 		image: dog1,
 	},
 	{
 		name: 'Thunder',
 		animal: 'Dog',
 		breed: 'Golden',
+		age: 12,
+		gender: 'f',
+		size: 'small',
+		color: 'brown',
 		image: dog2,
 	},
 ];
 
 function SearchPage() {
+	const [dataArrived, setDataArrived] = useState(false);
+
+	useEffect(() => {
+		// Set dataArrived to true after a 3-second delay
+		const delay = 3000; // 3 seconds
+		const timer = setTimeout(() => {
+			setDataArrived(true);
+		}, delay);
+
+		// Clear the timer to prevent it from running after component unmounts
+		return () => clearTimeout(timer);
+	}, []);
+
+	const ageRanges = [
+		{ label: 'Any', value: 'Any' },
+		{ label: '1 - 3', value: '1-3' },
+		{ label: '4 - 6', value: '4-6' },
+		{ label: '7 - 9', value: '7-9' },
+		{ label: '10+', value: '10+' },
+	];
+
+	// Step 1: Create state variables for selected filters
+	const [selectedFilters, setSelectedFilters] = useState({
+		animal: 'Any',
+		breed: 'Any',
+		age: 'Any',
+		gender: 'Any',
+		size: 'Any',
+		color: 'Any',
+	});
+
+	// Step 2: Filter cards based on selected filters
+	const filteredCards = cardData.filter((card) => {
+		const selectedAge = selectedFilters.age;
+
+		const isAgeInRange = (age, selectedAge) => {
+			if (selectedAge === 'Any') {
+				return true;
+			}
+
+			const [min, max] = selectedAge.split('-').map(Number);
+
+			if (min <= age && age <= max) {
+				return true;
+			}
+
+			return false;
+		};
+
+		return (
+			(selectedFilters.animal === 'Any' || card.animal === selectedFilters.animal) &&
+			(selectedFilters.breed === 'Any' || card.breed === selectedFilters.breed) &&
+			(selectedAge === 'Any' || isAgeInRange(card.age, selectedAge)) &&
+			(selectedFilters.gender === 'Any' || card.gender === selectedFilters.gender) &&
+			(selectedFilters.size === 'Any' || card.size === selectedFilters.size) &&
+			(selectedFilters.color === 'Any' || card.color === selectedFilters.color)
+		);
+	});
+
 	const cardsPerPage = 6; // Number of cards per page
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const indexOfLastCard = currentPage * cardsPerPage;
 	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-	const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard);
+	const paginatedFilteredCards = filteredCards.slice(indexOfFirstCard, indexOfLastCard);
+
+	// Calculate the number of pages based on the filtered card count
+	const pagesCount = Math.ceil(filteredCards.length / 6);
 
 	const nextPage = () => {
-		setCurrentPage(currentPage + 1);
+		if (currentPage < pagesCount) {
+			setCurrentPage(currentPage + 1);
+		}
 	};
 
 	const prevPage = () => {
-		setCurrentPage(currentPage - 1);
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		}
 	};
 
 	const isPreviousDisabled = currentPage === 1;
-	const isNextDisabled = cardData.length <= currentPage * cardsPerPage;
+	const isNextDisabled = filteredCards.length <= currentPage * cardsPerPage;
 
 	return (
 		<>
@@ -172,51 +296,66 @@ function SearchPage() {
 									</svg>
 								</label>
 
-								<div className="join mt-10">
-									<button
-										className="join-item btn"
-										onClick={prevPage}
-										disabled={isPreviousDisabled}
-									>
-										«
-									</button>
-									<button className="join-item btn">Page {currentPage}</button>
-									<button
-										className="join-item btn"
-										onClick={nextPage}
-										disabled={isNextDisabled}
-									>
-										»
-									</button>
-								</div>
+								{dataArrived ? (
+									<div className="join mt-10">
+										<button
+											className="join-item btn"
+											onClick={prevPage}
+											disabled={isPreviousDisabled}
+										>
+											«
+										</button>
+										<button className="join-item btn">Page {currentPage}</button>
+										<button
+											className="join-item btn"
+											onClick={nextPage}
+											disabled={isNextDisabled}
+										>
+											»
+										</button>
+									</div>
+								) : (
+									<div className="mt-10">
+										<PaginationSkeleton />
+									</div>
+								)}
+
 								<div className="my-14 flex flex-wrap gap-14 justify-center items-center">
-									{currentCards.map((card, index) => (
-										<Card4
-											key={index}
-											name={card.name}
-											animal={card.animal}
-											breed={card.breed}
-											image={card.image}
-										/>
-									))}
+									{dataArrived
+										? paginatedFilteredCards.map((card, index) => (
+												<Card4
+													key={index}
+													name={card.name}
+													animal={card.animal}
+													breed={card.breed}
+													image={card.image}
+												/>
+										  ))
+										: [1, 2, 3, 4, 5, 6].map((_, index) => <Card4Skeleton key={index} />)}
 								</div>
-								<div className="join mb-10">
-									<button
-										className="join-item btn"
-										onClick={prevPage}
-										disabled={isPreviousDisabled}
-									>
-										«
-									</button>
-									<button className="join-item btn">Page {currentPage}</button>
-									<button
-										className="join-item btn"
-										onClick={nextPage}
-										disabled={isNextDisabled}
-									>
-										»
-									</button>
-								</div>
+								{dataArrived ? (
+									<div className="join my-10">
+										<button
+											className="join-item btn"
+											onClick={prevPage}
+											disabled={isPreviousDisabled}
+										>
+											«
+										</button>
+										<button className="join-item btn">Page {currentPage}</button>
+										<button
+											className="join-item btn"
+											onClick={nextPage}
+											disabled={isNextDisabled}
+										>
+											»
+										</button>
+									</div>
+								) : (
+									<div className="my-10">
+										<PaginationSkeleton />
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
@@ -232,36 +371,72 @@ function SearchPage() {
 								<a>
 									<Select
 										title={'Animal'}
-										optionList={['Animal1', 'Animal2', 'Animal3']}
+										optionList={['Any', 'Dog', 'Cat', 'Rabbit']}
+										selected={selectedFilters.animal}
+										onChange={(selected) =>
+											setSelectedFilters({ ...selectedFilters, animal: selected })
+										}
 									/>
 								</a>
 							</li>
 							<li>
 								<a>
-									<Select title={'Breed'} optionList={['Breed1', 'Breed2', 'Breed3']} />
+									<Select
+										title={'Breed'}
+										optionList={['Any', 'Snow Bunny', 'Golden', 'Hotdog']}
+										selected={selectedFilters.breed}
+										onChange={(selected) =>
+											setSelectedFilters({ ...selectedFilters, breed: selected })
+										}
+									/>
 								</a>
 							</li>
 							<li>
 								<a>
-									<Select title={'Age'} optionList={['Age1', 'Age2', 'Age3']} />
+									<Select
+										title={'Age'}
+										optionList={ageRanges.map((range) => range.label)}
+										selected={selectedFilters.age}
+										onChange={(selected) =>
+											setSelectedFilters({ ...selectedFilters, age: selected })
+										}
+									/>
 								</a>
 							</li>
 							<li>
 								<a>
 									<Select
 										title={'Gender'}
-										optionList={['Gender1', 'Gender2', 'Gender3']}
+										optionList={['Any', 'Male', 'Female']}
+										selected={selectedFilters.gender}
+										onChange={(selected) =>
+											setSelectedFilters({ ...selectedFilters, gender: selected })
+										}
 									/>
 								</a>
 							</li>
 							<li>
 								<a>
-									<Select title={'Size'} optionList={['Size1', 'Size2', 'Size3']} />
+									<Select
+										title={'Size'}
+										optionList={['Any', 'Small', 'Medium', 'Big']}
+										selected={selectedFilters.size}
+										onChange={(selected) =>
+											setSelectedFilters({ ...selectedFilters, size: selected })
+										}
+									/>
 								</a>
 							</li>
 							<li>
 								<a>
-									<Select title={'Color'} optionList={['Color1', 'Color2', 'Color3']} />
+									<Select
+										title={'Color'}
+										optionList={['Any', 'Brown', 'White', 'Black']}
+										selected={selectedFilters.color}
+										onChange={(selected) =>
+											setSelectedFilters({ ...selectedFilters, color: selected })
+										}
+									/>
 								</a>
 							</li>
 						</ul>

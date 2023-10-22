@@ -1,0 +1,67 @@
+.card4Skel {
+	width: 18rem;
+	padding: 1rem;
+	text-align: center;
+	border-radius: 0.8rem;
+	background-color: rgb(255, 245, 230);
+}
+
+.card4__skeleton {
+	background-image: linear-gradient(90deg, #cdc7c0 0px, rgb(229 229 229 / 90%) 40px, #cdc7c0 80px);
+	background-size: 300%;
+	background-position: 100% 0;
+	border-radius: inherit;
+	animation: shimmer 1.5s infinite;
+}
+
+.card4__description {
+	height: 280px;
+}
+
+.card4__name {
+	height: 20px;
+	margin-top: 15px;
+}
+
+.card4__links {
+	height: 15px;
+	margin-top: 15px;
+}
+
+.card4Skel2 {
+	width: 10rem;
+	padding: 1rem;
+	text-align: center;
+	border-radius: 0.8rem;
+	background-color: rgb(255, 245, 230);
+}
+
+.card4__pagination {
+	height: 30px;
+	width: 125px;
+}
+
+@keyframes shimmer {
+	to {
+		background-position: -100% 0;
+	}
+}
+
+@media (max-width: 767px) {
+	.card4Skel {
+		width: 150px;
+	}
+	.card4__skeleton {
+		width: 150px;
+	}
+	.card4__description {
+		height: 150px;
+		width: 118px;
+	}
+	.card4__name {
+		width: 118px;
+	}
+	.card4__links {
+		width: 118px;
+	}
+}
