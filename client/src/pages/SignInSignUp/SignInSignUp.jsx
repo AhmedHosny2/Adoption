@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import WcOutlinedIcon from '@mui/icons-material/WcOutlined';
+import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined';
 
 function SignInSignUp() {
     const [isSignInClicked, setIsSignInClicked] = useState(false);
@@ -87,25 +94,77 @@ function SignInSignUp() {
                                 Sign Up
                             </button>
                         </div>
+                        <div className="relative flex items-center mt-4">
+                            <span className="absolute z-10  p-2">
+                                <PersonOutlineIcon />
+                            </span>
+                            <input
+                                type="text"
+                                className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
+                                placeholder="Username"
+                            />
+                        </div>
                         {isSignInClicked ? null : (
                             <>
-                                <div className="relative flex items-center mt-4">
-                                    <span className="absolute z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                        </svg>
+                                <div className="relative flex items-center mt-6">
+                                    <span className="absolute z-10  p-2">
+                                        <EmailOutlinedIcon />
+                                    </span>
+                                    <input type="email"
+                                        className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
+                                        placeholder="Email address" />
+                                </div>
+                            </>
+                        )}
+                        <div className="relative flex items-center mt-4">
+                            <span className="absolute z-10  p-2">
+                                <LockOutlinedIcon />
+                            </span>
+                            <input type="password"
+                                className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
+                                placeholder="Password" />
+                        </div>
+                        {isSignInClicked ? null : (
+                            <>
+                                <div className="relative flex items-center mt-4" title="Your date of birth">
+                                    <span className="absolute z-10 p-2" >
+                                        <CalendarMonthOutlinedIcon />
                                     </span>
                                     <input
-                                        type="text"
+                                        type="Date"
                                         className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
-                                        placeholder="Username"
+                                        placeholder="Date of Birth"
                                     />
                                 </div>
+                                <div className="relative flex items-center mt-4">
+                                    <span className="absolute z-10  p-2">
+                                        <WcOutlinedIcon />
+                                    </span>
+                                    <select
+                                        className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
+                                        id="gender"
+                                    >
+                                        <option value="" disabled selected>Select Your Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div className="relative flex items-center mt-4">
+                                    <span className="absolute z-10  p-2">
+                                        <LanguageOutlinedIcon />
+                                    </span>
+                                    <select
+                                        className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
+                                    >
+                                        <option value="">Select Your Country</option>
+                                        <option value="country1">Country 1</option>
+                                        <option value="country2">Country 2</option>
+                                        <option value="country3">Country 3</option>
+                                    </select>
+                                </div>
                                 <label htmlFor="dropzone-file" className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-base-200 border-2 border-dashed border-black rounded-lg text-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                    </svg>
-                                    <span className="mx-3 text-black">Profile Photo</span>
+                                    <PetsOutlinedIcon />
+                                    <span className="mx-3 text-black">Add your Pets</span>
                                     <input
                                         id="dropzone-file"
                                         type="file"
@@ -113,51 +172,6 @@ function SignInSignUp() {
                                     />
                                 </label>
                             </>
-                        )}
-                        <div className="relative flex items-center mt-6">
-                            <span className="absolute z-10">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                            </span>
-                            <input type="email"
-                                className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
-                                placeholder="Email address" />
-                        </div>
-                        <div className="relative flex items-center mt-4">
-                            <span className="absolute z-10">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                </svg>
-                            </span>
-                            <input type="password"
-                                className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
-                                placeholder="Password" />
-                        </div>
-                        {isSignInClicked ? null : (
-                            <div className="relative flex items-center mt-4">
-                                <span className="absolute z-10">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 mx-3 text-black"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                                        />
-                                    </svg>
-                                </span>
-                                <input
-                                    type="password"
-                                    className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
-                                    placeholder="Confirm Password"
-                                />
-                            </div>
                         )}
                         <div className="mt-6">
                             <button className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg hover:bg-accent focus:outline-none focus:ring focus:ring-opacity-50`}>
@@ -172,16 +186,8 @@ function SignInSignUp() {
                                         <path d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z" fill="#1976D2" />
                                     </svg>
                                 </div>
-                                <span class="w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
+                                <span class="w-5/6 px-4 py-3 font-bold text-center">Continue with Google</span>
                             </a>
-                            <div className="mt-6 text-center">
-                                <button
-                                    className="text-sm text-black hover:underline focus:outline-none"
-                                    onClick={handleSignInClick}
-                                >
-                                    {isSignInClicked ? '' : 'Already have an account?'}
-                                </button>
-                            </div>
                         </div>
                     </form>
                 </div>
