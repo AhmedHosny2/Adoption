@@ -34,6 +34,14 @@ const navigationVariants = {
 			stiffness: 120,
 		},
 	},
+	exit: {
+		y: [150, -250],
+		transition: {
+			delay: 0.2,
+			type: 'spring',
+			stiffness: 70,
+		},
+	},
 };
 
 const navigation = [
@@ -47,11 +55,16 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export default function Navbar() {
+export default function Navbar({ showNavNFooter, setShowNavNFooter }) {
 	const navigate = useNavigate();
 
 	return (
-		<motion.div variants={navigationVariants} initial="hidden" animate="visible">
+		<motion.div
+			variants={navigationVariants}
+			initial="hidden"
+			animate={showNavNFooter ? 'visible' : 'exit'}
+			exit="exit"
+		>
 			<Disclosure as="nav" className="bg-base-200 sticky">
 				{({ open }) => (
 					<>
@@ -75,7 +88,7 @@ export default function Navbar() {
 										dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
 										dragElastic={1}
 										className="flex flex-shrink-0 items-center"
-										onClick={() => navigate('/')}
+										onClick={() => navigate('/home')}
 									>
 										<motion.svg
 											variants={svgVariants}
@@ -174,11 +187,15 @@ export default function Navbar() {
 												<Menu.Item>
 													{({ active }) => (
 														<Link
-															to="#"
+															to="/"
 															className={classNames(
 																active ? 'bg-base-100' : '',
 																'block px-4 py-2 text-sm text-gray-700'
 															)}
+															onClick={() => {
+																setShowNavNFooter(false);
+																navigate('/');
+															}}
 														>
 															Log Out
 														</Link>

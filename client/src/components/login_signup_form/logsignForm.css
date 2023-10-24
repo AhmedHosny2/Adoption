@@ -1,0 +1,198 @@
+.logsign-wrapper {
+	--input-focus: #f6994e;
+	--font-color: #323232;
+	--font-color-sub: #666;
+	--bg-color: #ffffff;
+	--bg-color-alt: #666;
+	--main-color: #323232;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+/* switch card */
+.logsign-switch {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	width: 50px;
+	height: 20px;
+}
+
+.logsign-card-side::before {
+	position: absolute;
+	content: 'Log in';
+	left: -70px;
+	top: 0;
+	width: 100px;
+	text-decoration: underline;
+	color: var(--font-color);
+	font-weight: 600;
+}
+
+.logsign-card-side::after {
+	position: absolute;
+	content: 'Sign up';
+	left: 70px;
+	top: 0;
+	width: 100px;
+	text-decoration: none;
+	color: var(--font-color);
+	font-weight: 600;
+}
+
+.logsign-toggle {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.logsign-slider {
+	box-sizing: border-box;
+	border-radius: 5px;
+	border: 2px solid var(--main-color);
+	box-shadow: 4px 4px var(--main-color);
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--bg-colorcolor);
+	transition: 0.3s;
+}
+
+.logsign-slider:before {
+	box-sizing: border-box;
+	position: absolute;
+	content: '';
+	height: 20px;
+	width: 20px;
+	border: 2px solid var(--main-color);
+	border-radius: 5px;
+	left: -2px;
+	bottom: 2px;
+	background-color: var(--bg-color);
+	box-shadow: 0 3px 0 var(--main-color);
+	transition: 0.3s;
+}
+
+.logsign-toggle:checked + .logsign-slider {
+	background-color: var(--input-focus);
+}
+
+.logsign-toggle:checked + .logsign-slider:before {
+	transform: translateX(30px);
+}
+
+.logsign-toggle:checked ~ .logsign-card-side:before {
+	text-decoration: none;
+}
+
+.logsign-toggle:checked ~ .logsign-card-side:after {
+	text-decoration: underline;
+}
+
+/* card */
+
+.logsign-flip-card__inner {
+	width: 300px;
+	height: 350px;
+	position: relative;
+	background-color: transparent;
+	perspective: 1000px;
+	/* width: 100%;
+	  height: 100%; */
+	text-align: center;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+}
+
+.logsign-toggle:checked ~ .logsign-flip-card__inner {
+	transform: rotateY(180deg);
+}
+
+.logsign-toggle:checked ~ .logsign-flip-card__front {
+	box-shadow: none;
+}
+
+.logsign-flip-card__front,
+.logsign-flip-card__back {
+	padding: 20px;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	background: #f1ba63;
+	gap: 20px;
+	border-radius: 5px;
+	border: 2px solid var(--main-color);
+	box-shadow: 4px 4px var(--main-color);
+}
+
+.logsign-flip-card__back {
+	width: 100%;
+	transform: rotateY(180deg);
+}
+
+.logsign-flip-card__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.logsign-title {
+	margin: 20px 0 20px 0;
+	font-size: 25px;
+	font-weight: 900;
+	text-align: center;
+	color: var(--main-color);
+}
+
+.logsign-flip-card__input {
+	width: 250px;
+	height: 40px;
+	border-radius: 5px;
+	border: 2px solid var(--main-color);
+	background-color: var(--bg-color);
+	box-shadow: 4px 4px var(--main-color);
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--font-color);
+	padding: 5px 10px;
+	outline: none;
+}
+
+.logsign-flip-card__input::placeholder {
+	color: var(--font-color-sub);
+	opacity: 0.8;
+}
+
+.logsign-flip-card__input:focus {
+	border: 2px solid var(--input-focus);
+}
+
+.logsign-flip-card__btn:active,
+.logsign-button-confirm:active {
+	box-shadow: 0px 0px var(--main-color);
+	transform: translate(3px, 3px);
+}
+
+.logsign-flip-card__btn {
+	margin: 20px 0 20px 0;
+	width: 120px;
+	height: 40px;
+	border-radius: 5px;
+	border: 2px solid var(--main-color);
+	background-color: var(--bg-color);
+	box-shadow: 4px 4px var(--main-color);
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--font-color);
+	cursor: pointer;
+}

@@ -1,14 +1,32 @@
 import './footer.css';
 import { motion } from 'framer-motion';
 
-function Footer() {
+const footerVariants = {
+	hidden: {
+		y: 250,
+	},
+	visible: {
+		y: 0,
+		transition: {
+			delay: 1.5,
+			type: 'spring',
+			stiffness: 120,
+		},
+	},
+	exit: {
+		y: '-200vh',
+	},
+};
+
+function Footer({ showNavNFooter }) {
 	return (
 		<>
 			<motion.footer
 				className="footer p-10 bg-base-300 text-base-content"
-				initial={{ y: 250 }}
-				animate={{ y: 0 }}
-				transition={{ delay: 1.5, type: 'spring', stiffness: 120 }}
+				variants={footerVariants}
+				initial="hidden"
+				animate={showNavNFooter ? 'visible' : 'exit'}
+				exit="exit"
 			>
 				<nav>
 					<header className="footer-title">Services</header>
