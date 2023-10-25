@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { countries } from 'countries-list';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -45,14 +46,109 @@ function SignInSignUp() {
         e.preventDefault();
         setIsSignInClicked(true);
         setIsSignUpClicked(false);
+        resetUserData();
     };
 
     const handleSignUpClick = (e) => {
         e.preventDefault();
         setIsSignInClicked(false);
         setIsSignUpClicked(true);
+        resetUserData();
     };
 
+    const [userData, setUserData] = useState({
+        userName: '',
+        password: '',
+        email: '',
+        dateOfBirth: '',
+        gender: ''
+    });
+
+    const resetUserData = () => {
+        setUserData({
+            userName: '',
+            password: '',
+            email: '',
+            dateOfBirth: '',
+            gender: '',
+        });
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUserData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const signIn = (e) => {
+        e.preventDefault();
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userName: userData.userName,
+                password: userData.password,
+            }),
+            credentials: 'include',
+        })
+            .then((response) => {
+                // Check if the response status code is 200
+                if (response.status === 200) {
+                    // Access cookies from the "Set-Cookie" header in the response
+                    console.log(response.json())
+                    response.headers.get('Set-Cookie');
+                    return response.json();
+                } else {
+                    // Handle non-200 response status code
+                    return response.text().then((error) => {
+                        console.log(error);
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error.message);
+            });
+    };
+
+    const signUp = (e) => {
+        e.preventDefault();
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userName: userData.userName,
+                email: userData.email,
+                password: userData.password,
+                dateOfBirth: userData.dateOfBirth,
+                gender: userData.gender,
+                country: userData.country,
+            }),
+            credentials: 'include',
+        })
+            .then((response) => {
+                // Check if the response status code is 200
+                if (response.status === 200) {
+                    // Access cookies from the "Set-Cookie" header in the response
+                    console.log(response.json())
+                    response.headers.get('Set-Cookie');
+                    return response.json();
+                } else {
+                    // Handle non-200 response status code
+                    return response.text().then((error) => {
+                        console.log(error);
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error.message);
+            });
+    }
     return (
         <>
             <section>
@@ -102,6 +198,9 @@ function SignInSignUp() {
                                 type="text"
                                 className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
                                 placeholder="Username"
+                                name="userName"
+                                value={userData.userName}
+                                onChange={handleChange}
                             />
                         </div>
                         {isSignInClicked ? null : (
@@ -112,7 +211,10 @@ function SignInSignUp() {
                                     </span>
                                     <input type="email"
                                         className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
-                                        placeholder="Email address" />
+                                        placeholder="Email address"
+                                        name="email"
+                                        value={userData.email}
+                                        onChange={handleChange} />
                                 </div>
                             </>
                         )}
@@ -122,7 +224,10 @@ function SignInSignUp() {
                             </span>
                             <input type="password"
                                 className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
-                                placeholder="Password" />
+                                placeholder="Password"
+                                name="password"
+                                value={userData.password}
+                                onChange={handleChange} />
                         </div>
                         {isSignInClicked ? null : (
                             <>
@@ -134,6 +239,9 @@ function SignInSignUp() {
                                         type="Date"
                                         className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
                                         placeholder="Date of Birth"
+                                        name="dateOfBirth"
+                                        value={userData.dateOfBirth}
+                                        onChange={handleChange}
                                     />
                                 </div>
                                 <div className="relative flex items-center mt-4">
@@ -143,6 +251,9 @@ function SignInSignUp() {
                                     <select
                                         className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
                                         id="gender"
+                                        name="gender"
+                                        value={userData.gender}
+                                        onChange={handleChange}
                                     >
                                         <option value="" disabled selected>Select Your Gender</option>
                                         <option value="male">Male</option>
@@ -150,16 +261,21 @@ function SignInSignUp() {
                                     </select>
                                 </div>
                                 <div className="relative flex items-center mt-4">
-                                    <span className="absolute z-10  p-2">
+                                    <span className="absolute z-10 p-2">
                                         <LanguageOutlinedIcon />
                                     </span>
                                     <select
                                         className="input input-bordered join-item block w-full py-3 text-black bg-neutral-base-100 border rounded-lg px-11 focus:border-transparent focus:ring-primary focus:outline-none focus-ring focus-ring-opacity-40"
+                                        name="country"
+                                        value={userData.country}
+                                        onChange={handleChange}
                                     >
                                         <option value="">Select Your Country</option>
-                                        <option value="country1">Country 1</option>
-                                        <option value="country2">Country 2</option>
-                                        <option value="country3">Country 3</option>
+                                        {Object.keys(countries).map((countryCode) => (
+                                            <option key={countryCode} value={countryCode}>
+                                                {countries[countryCode].name}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <label htmlFor="dropzone-file" className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-base-200 border-2 border-dashed border-black rounded-lg text-black">
@@ -174,7 +290,10 @@ function SignInSignUp() {
                             </>
                         )}
                         <div className="mt-6">
-                            <button className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg hover:bg-accent focus:outline-none focus:ring focus:ring-opacity-50`}>
+                            <button
+                                className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg hover:bg-accent focus:outline-none focus:ring focus:ring-opacity-50`}
+                                onClick={isSignInClicked ? signIn : signUp}
+                            >
                                 {isSignInClicked ? 'Sign In' : 'Sign Up'}
                             </button>
                             <a href="#" class="flex items-center justify-center mt-4 text-black transition-colors duration-300 transform rounded-lg hover:bg-gray-50 bg-base-200 ">
