@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { countries } from 'countries-list';
+import { alertError, alertConfirm } from '../../utils/alerts';
+import { ToastContainer } from 'react-toastify';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -99,23 +101,35 @@ function SignInSignUp() {
                 // Check if the response status code is 200
                 if (response.status === 200) {
                     // Access cookies from the "Set-Cookie" header in the response
-                    console.log(response.json())
                     response.headers.get('Set-Cookie');
-                    return response.json();
+                    alertConfirm("Login succesfull add redirect link when page is done")
                 } else {
                     // Handle non-200 response status code
-                    return response.text().then((error) => {
-                        console.log(error);
+                    return response.json().then((error) => {
+                        alertError(error.message);
+                        console.log(error)
                     });
                 }
             })
             .catch((error) => {
                 console.error('Error:', error.message);
+                alertError(error.message);
             });
     };
 
     const signUp = (e) => {
         e.preventDefault();
+
+        const someNull = Object.values(userData).some((x) => x === '');
+        if (someNull === true) {
+            let nullKeys = '';
+            Object.entries(userData)
+                .filter(([k, v]) => v === '')
+                .forEach(([k]) => (nullKeys += `${k} `));
+            alertError(`Please fill the following data : ${nullKeys}`);
+            return;
+        }
+
         fetch(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, {
             method: 'POST',
             headers: {
@@ -135,17 +149,17 @@ function SignInSignUp() {
                 // Check if the response status code is 200
                 if (response.status === 200) {
                     // Access cookies from the "Set-Cookie" header in the response
-                    console.log(response.json())
                     response.headers.get('Set-Cookie');
-                    return response.json();
+                    alertConfirm("Sign up succesfull add redirect link when page is done")
                 } else {
                     // Handle non-200 response status code
-                    return response.text().then((error) => {
-                        console.log(error);
+                    return response.json().then((error) => {
+                        alertError(error.message);
                     });
                 }
             })
             .catch((error) => {
+                alertError(error.message);
                 console.error('Error:', error.message);
             });
     }
@@ -272,21 +286,20 @@ function SignInSignUp() {
                                     >
                                         <option value="">Select Your Country</option>
                                         {Object.keys(countries).map((countryCode) => (
-                                            <option key={countryCode} value={countryCode}>
+                                            <option key={countryCode} value={countries[countryCode].name}>
                                                 {countries[countryCode].name}
                                             </option>
                                         ))}
                                     </select>
                                 </div>
-                                <label htmlFor="dropzone-file" className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-base-200 border-2 border-dashed border-black rounded-lg text-black">
+                                <button
+                                    style={{ width: '100%' }}
+                                    className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-base-200 border-2 border-dashed border-black rounded-lg text-black"
+                                    onClick={(e) => { e.preventDefault(); alertConfirm("Please add a modal to take the pets") }}
+                                >
                                     <PetsOutlinedIcon />
-                                    <span className="mx-3 text-black">Add your Pets</span>
-                                    <input
-                                        id="dropzone-file"
-                                        type="file"
-                                        className="hidden text-black border border-black bg-base-200 hover:bg-base-100 focus:outline-none focus:ring focus:ring-opacity-40"
-                                    />
-                                </label>
+                                    <span className="mx-3">Add your Pets</span>
+                                </button>
                             </>
                         )}
                         <div className="mt-6">
@@ -311,6 +324,7 @@ function SignInSignUp() {
                     </form>
                 </div>
             </section>
+            <ToastContainer />
         </>
     );
 }
