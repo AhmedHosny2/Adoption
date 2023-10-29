@@ -55,7 +55,16 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
+const logout = () => {
+	document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+	document.cookie = 'authcookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+	document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+	window.location.href = '/';
+};
+
 export default function Navbar({ showNavNFooter, setShowNavNFooter }) {
+
 	const navigate = useNavigate();
 
 	return (
@@ -187,7 +196,33 @@ export default function Navbar({ showNavNFooter, setShowNavNFooter }) {
 												<Menu.Item>
 													{({ active }) => (
 														<Link
-															to="/"
+															className={classNames(
+																active ? 'bg-base-100' : '',
+																'block px-4 py-2 text-sm text-gray-700'
+															)}
+															onClick={logout}
+														>
+															Sign Out
+														</Link>
+													)}
+												</Menu.Item>
+												<Menu.Item>
+													{({ active }) => (
+														<Link
+															to="/sign?in=0"
+															className={classNames(
+																active ? 'bg-base-100' : '',
+																'block px-4 py-2 text-sm text-gray-700'
+															)}
+														>
+															Sign In
+														</Link>
+													)}
+												</Menu.Item>
+												<Menu.Item>
+													{({ active }) => (
+														<Link
+															to="/sign"
 															className={classNames(
 																active ? 'bg-base-100' : '',
 																'block px-4 py-2 text-sm text-gray-700'
@@ -197,7 +232,7 @@ export default function Navbar({ showNavNFooter, setShowNavNFooter }) {
 																navigate('/');
 															}}
 														>
-															Log Out
+															SIgn Up
 														</Link>
 													)}
 												</Menu.Item>
