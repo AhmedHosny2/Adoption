@@ -22,3 +22,5 @@ router.post("/logout", logoutUser);
 router.get("/", getUser);
 
 module.exports = router;
+
+// Path: users/routes/user.js

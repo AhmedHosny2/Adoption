@@ -61,7 +61,7 @@ exports.signupUser = async (req, res) => {
     const refreshTokenExpirationYears = 5; // Refresh token expiration time in years
     const refreshTokenExpiration = new Date(
       currentTime.getTime() +
-        refreshTokenExpirationYears * 365 * 24 * 60 * 60 * 1000
+      refreshTokenExpirationYears * 365 * 24 * 60 * 60 * 1000
     );
     res.cookie("refreshToken", refreshToken, {
       expires: refreshTokenExpiration,
@@ -158,3 +158,5 @@ exports.logoutUser = async (req, res) => {
   res.clearCookie("refreshToken"); // Clear both the access and refresh tokens
   res.json({ message: "Logout successful" });
 };
+
+// Path: users/controller/user.js

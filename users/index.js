@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const db = require("./config/database.js");
 const userRouter = require("./routes/user");
+const postRouter = require("./routes/post");
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/user", userRouter);
+app.use("/posts", postRouter);
 
 const PORT = process.env.PORT || 5001;
 
